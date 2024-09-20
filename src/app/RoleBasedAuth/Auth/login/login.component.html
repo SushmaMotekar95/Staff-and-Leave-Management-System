@@ -1,0 +1,28 @@
+<div class="login-container">
+  <div class="login-form">
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div>
+        <!-- <label for="username">Username</label> -->
+        <input id="username" formControlName="username" placeholder="Username" />
+        <div class="error" *ngIf="username?.invalid && username?.touched">
+          Username is required.
+        </div>
+      </div>
+      <div>
+        <!-- <label for="password">Password</label> -->
+        <input id="password" type="password" formControlName="password" placeholder="Password" />
+        <div class="error" *ngIf="password?.invalid && password?.touched">
+          <div *ngIf="password?.errors?.['required']">Password is required.</div>
+          <div *ngIf="password?.errors?.['minlength']">
+            Password must be at least 6 characters long.
+          </div>
+        </div>
+      </div>
+      <button class="submit" type="submit">Login</button>
+    </form>
+    <div class="login-redirect">
+      <p>New user? <button class="login" (click)="goToRegister()">Register here</button></p>
+    </div>
+  </div>
+</div>

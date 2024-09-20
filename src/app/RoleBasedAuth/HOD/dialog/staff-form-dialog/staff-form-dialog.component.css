@@ -1,0 +1,19 @@
+.full-width {
+    width: 100%;
+  }
+  
+  mat-dialog-title {
+    font-size: 24px;
+    color: #4CAF50;
+  }
+  
+  mat-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  button[mat-button] {
+    color: white;
+    background-color: #4CAF50;
+  }
+  

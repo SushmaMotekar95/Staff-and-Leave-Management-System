@@ -1,0 +1,106 @@
+<div class="leave-management">
+    <h1>Leave Management</h1>
+    <button (click)="toggleApplyLeaveForm()" class="apply-leave-button">Apply for New Leave</button>
+<div *ngIf="showApplyLeaveForm" class="container">
+  <h2 class="text-center mb-4">Apply for Leave</h2>
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="leaveForm" (ngSubmit)="applyLeave()">
+        
+        <div class="row mb-3">
+          <div class="form-group col-md-6">
+            <label for="fromDate">From Date</label>
+            <input type="date" class="form-control" id="fromDate" formControlName="fromDate" required  [min]="today">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="toDate">To Date</label>
+            <input type="date" class="form-control" id="toDate" formControlName="toDate" required>
+          </div>
+        </div>
+        <div class="row mb-3">
+        <div class="form-group mb-3 col-md-6">
+          <label for="reason">Reason</label>
+          <textarea id="reason" class="form-control" formControlName="reason" rows="4" required></textarea>
+        </div>
+        <div class="form-group ">
+        <button type="submit" class="btn">Submit</button>
+        </div>
+        </div>  
+      </form>
+    </div>
+  </div>
+</div>
+
+ <!-- Search and Status Filter -->
+ <div class="search-filter row">
+  <div class="col-md-4">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." class="form-control" />
+  </div>
+  <div class="col-md-4">
+    <select [(ngModel)]="selectedStatus" class="form-control">
+      <option value="" selected>Select Status</option>
+      <option value="">All</option>
+      <option value="Approved">Approved</option>
+      <option value="Rejected">Rejected</option>
+      <option value="Pending">Pending</option>
+    </select>
+  </div>
+</div>
+
+
+<!-- Leave History Table -->
+<table class="leave-table">
+  <thead>
+    <tr>
+      <th (click)="sortData('index')">
+        Sr No.
+        <mat-icon *ngIf="sortColumn === 'index' && sortDirection === 'asc'" class="sort-icon sort-asc">expand_less</mat-icon>
+        <mat-icon *ngIf="sortColumn === 'index' && sortDirection === 'desc'" class="sort-icon sort-desc">expand_more</mat-icon>
+        <mat-icon *ngIf="sortColumn !== 'index'" class="sort-icon sort-disabled">expand_less</mat-icon>
+      </th>
+      <th (click)="sortData('fromDate')">
+        From Date
+        <mat-icon *ngIf="sortColumn === 'fromDate' && sortDirection === 'asc'" class="sort-icon sort-asc">expand_less</mat-icon>
+        <mat-icon *ngIf="sortColumn === 'fromDate' && sortDirection === 'desc'" class="sort-icon sort-desc">expand_more</mat-icon>
+        <mat-icon *ngIf="sortColumn !== 'fromDate'" class="sort-icon sort-disabled">expand_less</mat-icon>
+      </th>
+      <th (click)="sortData('toDate')">
+        To Date
+        <mat-icon *ngIf="sortColumn === 'toDate' && sortDirection === 'asc'" class="sort-icon sort-asc">expand_less</mat-icon>
+        <mat-icon *ngIf="sortColumn === 'toDate' && sortDirection === 'desc'" class="sort-icon sort-desc">expand_more</mat-icon>
+        <mat-icon *ngIf="sortColumn !== 'toDate'" class="sort-icon sort-disabled">expand_less</mat-icon>
+      </th>
+      <th (click)="sortData('reason')">
+        Reason
+        <mat-icon *ngIf="sortColumn === 'reason' && sortDirection === 'asc'" class="sort-icon sort-asc">expand_less</mat-icon>
+        <mat-icon *ngIf="sortColumn === 'reason' && sortDirection === 'desc'" class="sort-icon sort-desc">expand_more</mat-icon>
+        <mat-icon *ngIf="sortColumn !== 'reason'" class="sort-icon sort-disabled">expand_less</mat-icon>
+      </th>
+      <th (click)="sortData('status')">
+        Status
+        <mat-icon *ngIf="sortColumn === 'status' && sortDirection === 'asc'" class="sort-icon sort-asc">expand_less</mat-icon>
+        <mat-icon *ngIf="sortColumn === 'status' && sortDirection === 'desc'" class="sort-icon sort-desc">expand_more</mat-icon>
+        <mat-icon *ngIf="sortColumn !== 'status'" class="sort-icon sort-disabled">expand_less</mat-icon>
+      </th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <div *ngIf="loading" class="loader-container">
+    <mat-spinner></mat-spinner>
+  </div>
+    
+  <tbody>
+    <tr *ngFor="let leave of leaves | searchSaffLeave: searchTerm:selectedStatus; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ leave.fromDate }}</td>
+      <td>{{ leave.toDate }}</td>
+      <td>{{ leave.reason }}</td>
+      <td>{{ leave.status }}</td>
+      <td class="icon-container">
+        <mat-icon class="view" (click)="viewLeave(leave)">visibility</mat-icon> 
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+  

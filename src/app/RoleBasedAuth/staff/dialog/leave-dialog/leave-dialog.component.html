@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Apply for New Leave</h2>
+<form [formGroup]="leaveForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>From Date</mat-label>
+    <input matInput formControlName="fromDate" type="date">
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>To Date</mat-label>
+    <input matInput formControlName="toDate" type="date">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Reason</mat-label>
+    <textarea matInput formControlName="reason"></textarea>
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button type="submit">Submit</button>
+  </div>
+</form>
+

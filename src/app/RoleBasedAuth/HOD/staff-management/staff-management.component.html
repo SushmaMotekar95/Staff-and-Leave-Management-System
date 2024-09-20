@@ -1,0 +1,71 @@
+<div class="staff-management-container">
+  <h1>Staff Management</h1>
+  <div class="addSearch">
+    <button class="add-staff-button" (click)="addStaff()">Add Staff</button>
+    <div class="col-md-4 ">
+      <input type="text" placeholder="Search staff..." [(ngModel)]="searchTerm" class="search-input form-control">
+    </div> 
+  </div>
+ 
+  <table>
+    <thead>
+      <tr>
+        <th (click)="sortData('index')">
+          Sr. No
+          <mat-icon *ngIf="sortColumn === 'index' && sortDirection === 'asc'" class="sort-icon sort-asc">expand_less</mat-icon>
+          <mat-icon *ngIf="sortColumn === 'index' && sortDirection === 'desc'" class="sort-icon sort-desc">expand_more</mat-icon>
+          <mat-icon *ngIf="sortColumn !== 'index'" class="sort-icon sort-disabled">expand_less</mat-icon>
+        </th>
+        <th (click)="sortData('UserFullName')">
+          Full Name
+          <mat-icon *ngIf="sortColumn === 'UserFullName' && sortDirection === 'asc'" class="sort-icon sort-asc">expand_less</mat-icon>
+          <mat-icon *ngIf="sortColumn === 'UserFullName' && sortDirection === 'desc'" class="sort-icon sort-desc">expand_more</mat-icon>
+          <mat-icon *ngIf="sortColumn !== 'UserFullName'" class="sort-icon sort-disabled">expand_less</mat-icon>
+        </th>
+        <th (click)="sortData('username')">
+          Username
+          <mat-icon *ngIf="sortColumn === 'username' && sortDirection === 'asc'" class="sort-icon sort-asc">expand_less</mat-icon>
+          <mat-icon *ngIf="sortColumn === 'username' && sortDirection === 'desc'" class="sort-icon sort-desc">expand_more</mat-icon>
+          <mat-icon *ngIf="sortColumn !== 'username'" class="sort-icon sort-disabled">expand_less</mat-icon>
+        </th>
+        <th (click)="sortData('email')">
+          Email
+          <mat-icon *ngIf="sortColumn === 'email' && sortDirection === 'asc'" class="sort-icon sort-asc">expand_less</mat-icon>
+          <mat-icon *ngIf="sortColumn === 'email' && sortDirection === 'desc'" class="sort-icon sort-desc">expand_more</mat-icon>
+          <mat-icon *ngIf="sortColumn !== 'email'" class="sort-icon sort-disabled">expand_less</mat-icon>
+        </th>
+        <th (click)="sortData('mobile')">
+          Mobile
+          <mat-icon *ngIf="sortColumn === 'mobile' && sortDirection === 'asc'" class="sort-icon sort-asc">expand_less</mat-icon>
+          <mat-icon *ngIf="sortColumn === 'mobile' && sortDirection === 'desc'" class="sort-icon sort-desc">expand_more</mat-icon>
+          <mat-icon *ngIf="sortColumn !== 'mobile'" class="sort-icon sort-disabled">expand_less</mat-icon>
+        </th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <div *ngIf="loading" class="loader-container">
+      <mat-spinner></mat-spinner>
+    </div>
+    <tbody>
+      <tr *ngFor="let staff of staffList | search: searchTerm;  let i = index">
+        <td>{{i+1}}</td>
+        <td>{{ staff.name }}</td>
+        <td>{{ staff.username }}</td>
+        <td>{{ staff.email }}</td>
+        <td>{{ staff.contactNumber }}</td>
+        <!-- <td>{{ staff.department }}</td> -->
+        <td class="button-container">
+            <mat-icon class="view" (click)="viewStaff(staff)">visibility</mat-icon> 
+    
+            <mat-icon class="view" (click)="deleteStaff(staff.id)">delete</mat-icon> 
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination controls -->
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="page <= 1">Previous</button>
+    <button (click)="nextPage()" [disabled]="page * pageSize >= totalStaff">Next</button>
+  </div>
+</div>

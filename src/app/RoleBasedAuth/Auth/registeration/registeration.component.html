@@ -1,0 +1,89 @@
+<div class="registration-container">
+  <div class="registration-form ">
+    <h2>Registration</h2>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-6">
+          <label for="name">Name</label>
+          <input id="name" formControlName="name" class="form-control" placeholder="Enter name" />
+          <div class="error" *ngIf="registrationForm.get('name')?.invalid && registrationForm.get('name')?.touched">
+            Name is required.
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="username">Username</label>
+          <input id="username" formControlName="username" class="form-control" placeholder="Enter username" />
+          <div class="error"
+            *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched">
+            Username is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label for="contactNumber">Contact Number</label>
+          <input id="contactNumber" formControlName="contactNumber" placeholder="+91 0000000000" class="form-control" />
+          <div class="error"
+            *ngIf="registrationForm.get('contactNumber')?.invalid && registrationForm.get('contactNumber')?.touched">
+            Contact Number is required.
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" class="form-control" placeholder="xyz@gmail.com" />
+          <div class="error" *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+            <div *ngIf="registrationForm.get('email')?.errors?.['required']">Email is required.</div>
+            <div *ngIf="registrationForm.get('email')?.errors?.['email']">Enter a valid email.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label for="password">Password</label>
+          <input id="password" type="password" formControlName="password" class="form-control"
+            placeholder="Enter password" />
+          <div class="error" *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+            <div *ngIf="registrationForm.get('password')?.errors?.['required']">Password is required.</div>
+            <div *ngIf="registrationForm.get('password')?.errors?.['minlength']">
+              Password must be at least 6 characters long.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="profileImage">Profile Image</label>
+          <input id="profileImage" type="file" (change)="onFileChange($event)" class="form-control" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label for="department">Department</label>
+          <select id="department" formControlName="department" class="form-control">
+            <option value="">Select Department</option>
+            <option *ngFor="let department of departments" [value]="department">{{ department }}</option>
+          </select>
+          <div class="error"
+            *ngIf="registrationForm.get('department')?.invalid && registrationForm.get('department')?.touched">
+            <div *ngIf="registrationForm.get('department')?.errors?.['required']">Department is required for HOD.</div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="role">Role</label>
+          <select id="role" formControlName="role" class="form-control">
+            <option value="">Select Role</option>
+            <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+          </select>
+          <div class="error" *ngIf="registrationForm.get('role')?.invalid && registrationForm.get('role')?.touched">
+            <div *ngIf="registrationForm.get('role')?.errors?.['required']">Role is required.</div>
+          </div>
+        </div>
+      </div>
+      <button class="submit" type="submit">Register</button>
+    </form>
+    <div class="login-redirect">
+      <p>Already a user? <button (click)="goToLogin()">Login here</button></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="staff-dashboard">
+    <h1>Staff Dashboard</h1>
+  
+    <div class="leave-summary">
+      <div class="summary-item">
+        <h2>Total Leaves Applied</h2>
+        <p>{{ totalLeaves }}</p>
+      </div>
+      <div class="summary-item">
+        <h2>Total Approved Leaves</h2>
+        <p>{{ approvedLeaves }}</p>
+      </div>
+      <div class="summary-item">
+        <h2>Total Rejected Leaves</h2>
+        <p>{{ rejectedLeaves }}</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="loading" class="loader-container">
+    <mat-spinner></mat-spinner>
+  </div>
+  

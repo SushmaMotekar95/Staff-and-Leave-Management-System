@@ -1,0 +1,50 @@
+<h1 mat-dialog-title>Add Staff Member</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="staffForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" required>
+      <mat-error *ngIf="staffForm.get('name')?.hasError('required')">Name is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" required>
+      <mat-error *ngIf="staffForm.get('username')?.hasError('required')">Username is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Contact Number</mat-label>
+      <input matInput formControlName="contactNumber" required>
+      <mat-error *ngIf="staffForm.get('contactNumber')?.hasError('required')">Contact Number is required</mat-error>
+      <mat-error *ngIf="staffForm.get('contactNumber')?.hasError('pattern')">Invalid phone number</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" required>
+      <mat-error *ngIf="staffForm.get('email')?.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="staffForm.get('email')?.hasError('email')">Invalid email</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" required>
+      <mat-error *ngIf="staffForm.get('password')?.hasError('required')">Password is required</mat-error>
+      <mat-error *ngIf="staffForm.get('password')?.hasError('minlength')">Password must be at least 6 characters</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Department</mat-label>
+        <input matInput formControlName="department" readonly="true" value="{{ department }}">
+        <mat-error *ngIf="staffForm.get('department')?.hasError('required')">Department is required</mat-error>
+      </mat-form-field>
+      
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button [disabled]="staffForm.invalid" (click)="onSubmit()">Submit</button>
+</div>
+

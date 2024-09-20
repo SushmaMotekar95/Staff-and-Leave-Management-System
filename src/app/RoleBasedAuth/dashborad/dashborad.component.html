@@ -1,0 +1,26 @@
+<!-- dashboard.component.html -->
+<div class="dashboard-container">
+    <aside class="sidenav" [class.closed]="isSidenavClosed">
+        <nav>
+            <ul>
+                <li *ngIf="isHOD"><a routerLink="/dashborad/HOD-dashboard">Dashboard</a></li>
+                <li *ngIf="isHOD"><a routerLink="/dashborad/staff-management">Staff Management</a></li>
+                <li *ngIf="isHOD"><a routerLink="/dashborad/leave-management">Leave Management</a></li>
+                <li *ngIf="!isHOD"><a routerLink="/dashborad/staff-dashboard">Dashboard</a></li>
+                <li *ngIf="!isHOD"><a routerLink="/dashborad/staff-leave-management">Leave Management</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <div class="main-content" [class.sidenav-collapsed]="isSidenavClosed">
+        <header class="header">
+            <button class="sidenav-toggle" (click)="toggleSidenav()">☰</button>
+            <h1>{{userRole}} Dashboard</h1>
+            <button class="logout-button" (click)="logout()">Logout</button>
+        </header>
+        <main class="content">
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+</div>
+

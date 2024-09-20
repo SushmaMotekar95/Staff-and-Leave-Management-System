@@ -1,0 +1,118 @@
+.dashboard-container {
+    display: flex;
+    /* height: 100vh; */
+    overflow: hidden;
+}
+
+/* Sidenav Styles */
+.sidenav {
+    background-color: #0C134F;
+    /* color: white; */
+    width: 250px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, width 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 2px 2px 10px rgb(5, 5, 5);
+}
+
+.sidenav.closed {
+    width: 0;
+    overflow: hidden;
+}
+
+.sidenav nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidenav nav ul li {
+    margin: 20px 0;
+}
+
+.sidenav nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    display: block;
+}
+
+.sidenav nav ul li a:hover {
+    background-color: #303f9f;
+}
+
+/* Main Content Styles */
+.main-content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+.main-content.sidenav-collapsed {
+    margin-left: 0;
+    width: 100%;
+}
+
+/* Header Styles */
+.header {
+    background-color: #0C134F;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.logout-button {
+    background-color: #EE4E4E;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.sidenav-toggle {
+    background-color: #0C134F;
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+/* Content Styles */
+.content {
+    padding: 20px;
+    background-color: #f9f9f9;
+    /* height: 100%; */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .sidenav {
+        position: absolute;
+        height: 100%;
+        width: 250px;
+        transform: translateX(-100%);
+    }
+
+    .sidenav.closed {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
